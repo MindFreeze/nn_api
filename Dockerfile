@@ -11,7 +11,7 @@ COPY ./requirements.txt /app/requirements.txt
 RUN apk update && \
     apk add --no-cache python3-dev \
         # Numpy dependencies
-        make automake gcc g++ && \
+        make automake gcc g++ \
         # Pillow dependencies
         jpeg-dev zlib-dev && \
     pip3 install --upgrade pip && \
