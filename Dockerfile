@@ -9,18 +9,11 @@ USER root
 COPY ./requirements.txt /app/requirements.txt
 
 RUN apk update && \
-    apk add --no-cache make automake gcc g++ \
+    apk add --no-cache python3-dev \
+        # Numpy dependencies
+        make automake gcc g++ && \
         # Pillow dependencies
-        jpeg-dev zlib-dev \
-        # freetype-dev \
-        # lcms2-dev \
-        # openjpeg-dev \
-        # tiff-dev \
-        # tk-dev \
-        # tcl-dev \
-        # harfbuzz-dev \
-        # fribidi-dev
-        && \
+        jpeg-dev zlib-dev && \
     pip3 install --upgrade pip && \
     pip3 install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html && \
     pip3 install -r requirements.txt && \

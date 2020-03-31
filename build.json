@@ -1,9 +1,0 @@
-{
-    "squash": false,
-    "build_from": {
-        "amd64": "python:3.7.7-alpine",
-        "armv7": "python:3.7.7-alpine",
-        "i386": "python:3.7.7-alpine"
-    },
-    "args": {}
-}
