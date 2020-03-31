@@ -1,5 +1,6 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+# ARG BUILD_FROM
+# FROM $BUILD_FROM
+FROM python/python:3.7-alpine
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -9,7 +10,7 @@ USER root
 COPY ./requirements.txt /app/requirements.txt
 
 RUN apk update && \
-    apk add --no-cache python3-dev \
+    apk add --no-cache \
         # Numpy dependencies
         make automake gcc g++ \
         # Pillow dependencies
