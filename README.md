@@ -1,2 +1,2 @@
 # nn_api
-A python API for neural net processing
+A basic python API for neural net processing packaged as a Home Assistant addon.

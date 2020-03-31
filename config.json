@@ -1,0 +1,12 @@
+{
+    "name": "HTTP Pytorch processing",
+    "version": "0.1.0",
+    "slug": "pytorch",
+    "description": "Process images and other data with pytorch",
+    "arch": ["amd64", "armv7", "i386"],
+    "startup": "application",
+    "boot": "auto",
+    "options": {},
+    "schema": false,
+    "ingress": false
+}
