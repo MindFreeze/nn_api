@@ -1,6 +1,6 @@
 {
     "name": "HTTP Pytorch processing",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "slug": "pytorch",
     "description": "Process images and other data with pytorch",
     "arch": ["armv7"],
