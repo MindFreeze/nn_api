@@ -6,6 +6,9 @@
     "arch": ["armv7"],
     "startup": "application",
     "boot": "auto",
+    "ports": {
+        "5124/tcp": 5124
+    },
     "options": {},
     "schema": false,
     "ingress": false
