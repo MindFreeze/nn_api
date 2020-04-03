@@ -104,3 +104,4 @@ ENV/
 /migrations
 
 .vscode
+*.pth.tar
