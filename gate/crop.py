@@ -3,6 +3,7 @@ from PIL import Image
 import torch
 import torchvision.transforms.functional as F
 
+
 def _get_image_size(img):
     if F._is_pil_image(img):
         return img.size
@@ -10,6 +11,7 @@ def _get_image_size(img):
         return img.shape[-2:][::-1]
     else:
         raise TypeError("Unexpected type {}".format(type(img)))
+
 
 class Crop(object):
     def __init__(self, location, size, padding=None, pad_if_needed=False, fill=0, padding_mode='constant'):
@@ -58,10 +60,12 @@ class Crop(object):
 
         # pad the width if needed
         if self.pad_if_needed and img.size[0] < self.size[1]:
-            img = F.pad(img, (self.size[1] - img.size[0], 0), self.fill, self.padding_mode)
+            img = F.pad(
+                img, (self.size[1] - img.size[0], 0), self.fill, self.padding_mode)
         # pad the height if needed
         if self.pad_if_needed and img.size[1] < self.size[0]:
-            img = F.pad(img, (0, self.size[0] - img.size[1]), self.fill, self.padding_mode)
+            img = F.pad(
+                img, (0, self.size[0] - img.size[1]), self.fill, self.padding_mode)
 
         i, j, h, w = self.get_params(img, self.location, self.size)
 

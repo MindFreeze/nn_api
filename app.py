@@ -1,4 +1,6 @@
+import flask
 from flask import Flask, jsonify
+from gate.predict import predict as predict_gate
 
 app = Flask(__name__)
 
@@ -8,4 +10,12 @@ def hello_world():
 
 @app.route("/gate", methods=['POST'])
 def gate():
-    return jsonify({'success': True, 'tags': [{'tag': 'closed', 'confidence': 0.9}, {'tag': 'open', 'confidence': 0.1}]}), 200
+    if not flask.request.is_json:
+        return jsonify({"error": "JSON payload expected"}), 400
+
+    request = flask.request.get_json()
+    if not request["base64"]:
+        return jsonify({"error": "base64 image expected"}), 400
+
+    tags = predict_gate(request["base64"])
+    return jsonify({'success': True, 'tags': tags}), 200

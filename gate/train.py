@@ -15,7 +15,8 @@ import torchvision.datasets as datasets
 import torchvision.models as models
 import torch.nn.functional as F
 
-import crop
+from crop import Crop
+from model import Net
 
 parser = argparse.ArgumentParser(description='PyTorch Training')
 parser.add_argument('data', metavar='DIR',
@@ -38,29 +39,6 @@ parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
                     help='evaluate model on validation set')
 
 best_prec1 = 0
-
-
-class Net(nn.Module):
-    def __init__(self):
-        super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(3, 6, kernel_size=2)
-        self.conv2 = nn.Conv2d(6, 16, kernel_size=3)
-        self.conv3 = nn.Conv2d(16, 24, kernel_size=3)
-        self.conv4 = nn.Conv2d(24, 32, kernel_size=3)
-        self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(32*14*14, 256)
-        self.fc2 = nn.Linear(256, 1)
-
-    def forward(self, x):
-        x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = self.pool(F.relu(self.conv3(x)))
-        x = self.pool(F.relu(self.conv4(x)))
-        # print('x.size()', x.size())
-        x = x.view(x.size(0), -1)
-        x = F.relu(self.fc1(x))
-        x = torch.sigmoid(self.fc2(x))
-        return x
 
 
 def main():
@@ -101,7 +79,7 @@ def main():
     dataset_train = datasets.ImageFolder(
         traindir,
         transform=transforms.Compose([
-            crop.Crop((0, 0), (720, 720)),
+            Crop((0, 0), (720, 720)),
             transforms.Resize(256),
             # transforms.RandomResizedCrop(224),
             # transforms.RandomHorizontalFlip(),
@@ -118,7 +96,7 @@ def main():
         datasets.ImageFolder(
             valdir,
             transform=transforms.Compose([
-                crop.Crop((0, 0), (720, 720)),
+                Crop((0, 0), (720, 720)),
                 transforms.Resize(256),
                 # transforms.CenterCrop(224),
                 transforms.ToTensor(),
@@ -198,7 +176,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                  'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(
+                  'Prec {top1.val:.3f} ({top1.avg:.3f})\n'.format(
                       epoch, i, len(train_loader), batch_time=batch_time,
                       data_time=data_time, loss=losses, top1=top1))
 
@@ -235,7 +213,7 @@ def validate(val_loader, model, criterion):
                 print('Test: [{0}/{1}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                      'Prec@1 {top1.val:.3f} ({top1.avg:.3f})'.format(
+                      'Prec {top1.val:.3f} ({top1.avg:.3f})\n'.format(
                           i, len(val_loader), batch_time=batch_time, loss=losses,
                           top1=top1))
 
