@@ -21,4 +21,4 @@ dev:
 	FLASK_APP=app.py flask run
 
 run:
-	gunicorn -b 0.0.0.0:5124 app:app
+	gunicorn -b 0.0.0.0:5124 --workers=2 --worker-class=gthread app:app
