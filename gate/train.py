@@ -172,12 +172,12 @@ def train(train_loader, model, criterion, optimizer, epoch):
         end = time.time()
 
         if i % args.print_freq == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
-                  'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                  'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
-                  'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                  'Prec {top1.val:.3f} ({top1.avg:.3f})\n'.format(
-                      epoch, i, len(train_loader), batch_time=batch_time,
+            print('Epoch[{0}]:  '
+                  'Time {batch_time.val:.3f}\t'
+                  'Data {data_time.val:.3f}\t'
+                  'Loss {loss.val:.4f}\t'
+                  'Prec {top1.val:.3f}\n'.format(
+                      epoch, batch_time=batch_time,
                       data_time=data_time, loss=losses, top1=top1))
 
 
@@ -210,12 +210,10 @@ def validate(val_loader, model, criterion):
             end = time.time()
 
             if i % args.print_freq == 0:
-                print('Test: [{0}/{1}]\t'
-                      'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                      'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                      'Prec {top1.val:.3f} ({top1.avg:.3f})\n'.format(
-                          i, len(val_loader), batch_time=batch_time, loss=losses,
-                          top1=top1))
+                print('Test:\t   '
+                      'Time {batch_time.val:.3f}\t'
+                      'Loss {loss.val:.4f}\t'
+                      'Prec {top1.val:.3f}\n'.format(batch_time=batch_time, loss=losses, top1=top1))
 
     return top1.avg
 
