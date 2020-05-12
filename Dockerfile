@@ -1,6 +1,6 @@
 # ARG BUILD_FROM
 # FROM $BUILD_FROM
-FROM konradmalik/pytorch-opencv-armhf
+FROM mindfreeze/pytorch-opencv-armhf
 
 # SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
