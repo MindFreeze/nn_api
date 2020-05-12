@@ -54,7 +54,7 @@ def predict(image):
     # forward pass rooms
     output = model.forward(input_img)
     prob = output.data.squeeze().item()
-    print('output', output, prob)
+    print('gate open probability', prob)
 
     return [
         {'tag': 'open', 'confidence': prob},
