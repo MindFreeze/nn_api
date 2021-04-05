@@ -1,9 +1,9 @@
 {
     "name": "HTTP Pytorch processing",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "slug": "pytorch",
     "description": "Process images and other data with pytorch",
-    "arch": ["armv7"],
+    "arch": ["amd64"],
     "startup": "application",
     "boot": "auto",
     "ports": {
